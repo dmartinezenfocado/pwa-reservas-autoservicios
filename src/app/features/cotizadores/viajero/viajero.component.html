@@ -1,19 +1,99 @@
-<div class="page">
-  <h2>Cotizar Viajero</h2>
+<div class="viajero-page page">
+  <div class="cols">
+    <!-- Columna 1: Cantidad de viajeros -->
+    <section class="col col-left">
+      <h2>Cantidad de Viajeros</h2>
 
-  <form [formGroup]="form" (ngSubmit)="cotizar()" class="grid">
-    <label>Destino <input formControlName="destino"></label>
-    <label>Desde <input type="date" formControlName="desde"></label>
-    <label>Hasta <input type="date" formControlName="hasta"></label>
-    <label>Viajeros <input type="number" formControlName="viajeros"></label>
+      <div class="row-qty">
+        <button type="button" class="btn-circ" (click)="dec('menores64')">−</button>
+        <div class="qty">{{ form.value.menores64 || 0 }}</div>
+        <button type="button" class="btn-circ" (click)="inc('menores64')">+</button>
+        <span class="lbl">Menor de 64 años</span>
+      </div>
 
-    <button type="submit" [disabled]="form.invalid">Calcular</button>
-  </form>
+      <div class="row-qty">
+        <button type="button" class="btn-circ" (click)="dec('s65a75')">−</button>
+        <div class="qty">{{ form.value.s65a75 || 0 }}</div>
+        <button type="button" class="btn-circ" (click)="inc('s65a75')">+</button>
+        <span class="lbl">65 a 75 años</span>
+      </div>
 
-  <div *ngIf="prima !== null" class="resultado">
-    <div class="monto">Prima estimada: <strong>RD$ {{ prima }}</strong></div>
-    <small class="detalle">{{ detalle }}</small>
+      <div class="row-qty">
+        <button type="button" class="btn-circ" (click)="dec('s76a85')">−</button>
+        <div class="qty">{{ form.value.s76a85 || 0 }}</div>
+        <button type="button" class="btn-circ" (click)="inc('s76a85')">+</button>
+        <span class="lbl">76 a 85 años</span>
+      </div>
+    </section>
+
+    <!-- Columna 2: Datos del Viaje -->
+    <section class="col col-mid">
+      <h2>Datos del Viaje</h2>
+
+      <label>
+        <input type="text" placeholder="Destino" formControlName="destino" />
+        <span class="hint" title="País o ciudad destino">?</span>
+      </label>
+
+      <label class="sel">
+        <select formControlName="plan">
+          <option *ngFor="let p of planes" [value]="p">{{ p }}</option>
+        </select>
+        <span class="hint" title="Nivel de cobertura">?</span>
+      </label>
+
+      <label class="date">
+        <input type="date" formControlName="salida" placeholder="Salida" />
+      </label>
+
+      <label class="date">
+        <input type="date" formControlName="regreso" placeholder="Regreso" />
+      </label>
+
+      <label>
+        <input type="text" [value]="dias || ''" readonly placeholder="Cantidad Días" />
+      </label>
+    </section>
+
+    <!-- Columna 3: Información General + acciones -->
+    <section class="col col-right">
+      <h2>Información General</h2>
+
+      <label class="sel">
+        <select formControlName="tipoId">
+          <option *ngFor="let t of tiposIdent" [value]="t">{{ t }}</option>
+        </select>
+      </label>
+
+      <label>
+        <input type="text" placeholder="Identificación" formControlName="identificacion" />
+      </label>
+
+      <label>
+        <input type="text" placeholder="A Nombre de" formControlName="nombre" />
+      </label>
+
+      <label>
+        <input type="email" placeholder="Correo Electrónico" formControlName="email" />
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn blue" (click)="limpiar()">Limpiar</button>
+        <button type="button" class="btn orange" (click)="cotizar()">Cotizar</button>
+      </div>
+
+      <div class="result" *ngIf="prima !== null">
+        Prima estimada: <strong>RD$ {{ prima }}</strong><br />
+        <small>{{ mensaje }}</small>
+      </div>
+
+      <div class="msg" *ngIf="mensaje && prima === null">{{ mensaje }}</div>
+    </section>
   </div>
+
+  <p class="nota">
+    * La contratación de este seguro no está disponible para uso en República Dominicana.
+  </p>
 
   <app-back-cancel-bar />
 </div>
