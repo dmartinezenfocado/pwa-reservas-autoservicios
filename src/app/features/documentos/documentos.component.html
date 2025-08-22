@@ -1,1 +1,13 @@
-<p>documentos works!</p>
+<div class="page">
+  <h2>Constancias / Documentos</h2>
+
+  <form [formGroup]="form" (ngSubmit)="buscar()" class="row">
+    <input placeholder="No. de póliza o cédula" formControlName="query" />
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div *ngIf="html" class="doc" [innerHTML]="html"></div>
+  <button *ngIf="html" (click)="imprimir()">Imprimir</button>
+
+  <app-back-cancel-bar />
+</div>

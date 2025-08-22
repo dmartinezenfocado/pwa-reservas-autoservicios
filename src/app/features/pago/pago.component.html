@@ -1,1 +1,13 @@
-<p>pago works!</p>
+<div class="page">
+  <h2>Pago de Póliza</h2>
+
+  <form [formGroup]="form" (ngSubmit)="pagar()" class="grid">
+    <label>Número de póliza <input formControlName="poliza"></label>
+    <label>Monto <input type="number" formControlName="monto"></label>
+    <button type="submit" [disabled]="form.invalid || loading">Procesar pago</button>
+  </form>
+
+  <pre *ngIf="mensaje" class="msg">{{ mensaje }}</pre>
+
+  <app-back-cancel-bar />
+</div>

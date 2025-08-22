@@ -1,1 +1,18 @@
-<p>respaldo-migratorio works!</p>
+<div class="page">
+  <h2>Respaldo Migratorio</h2>
+
+  <form [formGroup]="form" (ngSubmit)="cotizar()" class="grid">
+    <label>Tipo de trámite <input formControlName="tramite"></label>
+    <label>Adultos <input type="number" formControlName="adultos"></label>
+    <label>Niños <input type="number" formControlName="ninos"></label>
+
+    <button type="submit" [disabled]="form.invalid">Calcular</button>
+  </form>
+
+  <div *ngIf="prima !== null" class="resultado">
+    <div class="monto">Prima estimada: <strong>RD$ {{ prima }}</strong></div>
+    <small class="detalle">{{ detalle }}</small>
+  </div>
+
+  <app-back-cancel-bar />
+</div>

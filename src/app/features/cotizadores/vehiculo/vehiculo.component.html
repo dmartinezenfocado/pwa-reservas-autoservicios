@@ -1,1 +1,19 @@
-<p>vehiculo works!</p>
+<div class="page">
+  <h2>Cotizar Vehículo</h2>
+
+  <form [formGroup]="form" (ngSubmit)="cotizar()" class="grid">
+    <label>Marca <input formControlName="marca"></label>
+    <label>Modelo <input formControlName="modelo"></label>
+    <label>Año <input type="number" formControlName="anio"></label>
+    <label>Valor (RD$) <input type="number" formControlName="valor"></label>
+
+    <button type="submit" [disabled]="form.invalid">Calcular</button>
+  </form>
+
+  <div *ngIf="prima !== null" class="resultado">
+    <div class="monto">Prima estimada: <strong>RD$ {{ prima }}</strong></div>
+    <small class="detalle">{{ detalle }}</small>
+  </div>
+
+  <app-back-cancel-bar />
+</div>
