@@ -7,30 +7,8 @@ import { Router } from '@angular/router';
   selector: 'app-configuracion',
   standalone: true,
   imports: [ReactiveFormsModule],
-  template: `
-    <div style="padding:2rem;max-width:800px;margin:0 auto">
-      <h2>Configuración de Terminal</h2>
-      <form [formGroup]="form" (ngSubmit)="save()" style="display:grid;gap:.75rem">
-        <input placeholder="ID de terminal" formControlName="terminalId">
-        <input placeholder="Sucursal" formControlName="branchName">
-        <select formControlName="defaultLang">
-          <option value="es">Español</option>
-          <option value="en">English</option>
-        </select>
-        <fieldset style="display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem">
-          <label><input type="checkbox" formControlName="vehiculo"> Vehículo</label>
-          <label><input type="checkbox" formControlName="viajero"> Viajero</label>
-          <label><input type="checkbox" formControlName="hogar"> Hogar</label>
-          <label><input type="checkbox" formControlName="respaldoMigratorio"> Respaldo Migratorio</label>
-          <label><input type="checkbox" formControlName="pago"> Pago</label>
-          <label><input type="checkbox" formControlName="documentos"> Documentos</label>
-        </fieldset>
-        <input placeholder="client_id" formControlName="clientId">
-        <input placeholder="client_secret" formControlName="clientSecret">
-        <button type="submit" [disabled]="form.invalid">Guardar</button>
-      </form>
-    </div>
-  `,
+  templateUrl: './configuracion.component.html',
+  styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent {
   private fb = inject(FormBuilder);
@@ -76,6 +54,13 @@ export class ConfiguracionComponent {
       },
       clientId: v.clientId!, clientSecret: v.clientSecret!,
     });
+    this.router.navigateByUrl('/');
+  }
+
+  async onFile(e: Event){
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    await this.cfg.importFromFile(file);
     this.router.navigateByUrl('/');
   }
 }

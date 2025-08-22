@@ -1,1 +1,37 @@
-<p>configuracion works!</p>
+<div class="page">
+  <h2>Configuración de Terminal</h2>
+  <form [formGroup]="form" (ngSubmit)="save()" class="grid">
+    <label>Identificación de la terminal<input formControlName="terminalId"></label>
+    <label>Nombre sucursal<input formControlName="branchName"></label>
+
+    <label>Idioma por defecto
+      <select formControlName="defaultLang">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+
+    <fieldset class="box">
+      <legend>Menú habilitado</legend>
+      <label><input type="checkbox" formControlName="vehiculo"> Vehículo</label>
+      <label><input type="checkbox" formControlName="viajero"> Viajero</label>
+      <label><input type="checkbox" formControlName="hogar"> Hogar</label>
+      <label><input type="checkbox" formControlName="respaldoMigratorio"> Respaldo Migratorio</label>
+      <label><input type="checkbox" formControlName="pago"> Pago</label>
+      <label><input type="checkbox" formControlName="documentos"> Documentos</label>
+    </fieldset>
+
+    <fieldset class="box">
+      <legend>Credenciales API</legend>
+      <label>client_id<input formControlName="clientId" required></label>
+      <label>client_secret<input formControlName="clientSecret" required></label>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit" [disabled]="form.invalid">Guardar</button>
+      <label class="upload">Importar JSON
+        <input type="file" (change)="onFile($event)" accept="application/json" hidden>
+      </label>
+    </div>
+  </form>
+</div>

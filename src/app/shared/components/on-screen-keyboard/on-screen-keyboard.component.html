@@ -1,0 +1,13 @@
+<div class="osk" *ngIf="visible">
+  <div class="row">
+    <button *ngFor="let k of row1" (click)="press(k)">{{ k }}</button>
+  </div>
+  <div class="row">
+    <button *ngFor="let k of row2" (click)="press(k)">{{ k }}</button>
+  </div>
+  <div class="row">
+    <button *ngFor="let k of row3" (click)="press(k)">{{ k }}</button>
+    <button (click)="backspace()">⌫</button>
+    <button (click)="enter()">⏎</button>
+  </div>
+</div>

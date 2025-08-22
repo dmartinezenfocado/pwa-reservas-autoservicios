@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-screensaver',
-  imports: [],
+  standalone: true,
   templateUrl: './screensaver.component.html',
-  styleUrl: './screensaver.component.scss'
+  styleUrls: ['./screensaver.component.scss']
 })
-export class Screensaver {
-
+export class ScreensaverComponent {
+  constructor(private router: Router) {}
+  exit(){ this.router.navigateByUrl('/'); }
 }

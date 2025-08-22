@@ -1,0 +1,6 @@
+.wrap{ min-height:100dvh; display:grid; place-items:center; padding:2rem; }
+h1{ font-size:2.2rem; margin-bottom:1rem; }
+.menu{ display:grid; grid-template-columns:repeat(2,minmax(260px,1fr)); gap:1rem; width:min(100%,900px); }
+button{ font-size:1.25rem; padding:1.25rem; border-radius:1rem; border:none; background:#1f4aa7; color:#fff; }
+.support{ margin-top:1.5rem; opacity:.9; }
+.config{ position:fixed; left:.75rem; bottom:.75rem; opacity:.6; cursor:pointer; }

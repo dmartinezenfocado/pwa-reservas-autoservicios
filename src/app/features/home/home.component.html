@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="wrap">
+  <h1>Portal Autogestión Seguros Reservas</h1>
+
+  <div class="menu" *ngIf="cfg; else pideConfig">
+    <button *ngIf="cfg.menu.vehiculo"  [routerLink]="['/cotizar/vehiculo']">Cotizar Vehículo</button>
+    <button *ngIf="cfg.menu.viajero"   [routerLink]="['/cotizar/viajero']">Cotizar Viajero</button>
+    <button *ngIf="cfg.menu.hogar"     [routerLink]="['/cotizar/hogar']">Preserva tu Hogar</button>
+    <button *ngIf="cfg.menu.respaldoMigratorio" [routerLink]="['/cotizar/respaldo-migratorio']">Respaldo Migratorio</button>
+    <button *ngIf="cfg.menu.pago"      [routerLink]="['/pago']">Pago de Póliza</button>
+    <button *ngIf="cfg.menu.documentos"[routerLink]="['/documentos']">Constancias / Documentos</button>
+  </div>
+
+  <ng-template #pideConfig>
+    <p>Configura la terminal para habilitar el menú.</p>
+    <button (click)="goConfig()">⚙ Abrir Configuración</button>
+  </ng-template>
+
+  <div class="support">Soporte: 809-000-0000 · soporte@reservas.com</div>
+  <div class="config" (click)="goConfig()">⚙ Configuración</div>
+</div>
