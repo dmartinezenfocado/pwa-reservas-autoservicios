@@ -64,3 +64,6 @@ For more information on using the Angular CLI, including detailed command refere
 Produccion:
 
 npx http-server -p 8080 -c-1 dist/pwa-reservas-autoservicios/browser
+
+
+ng g c features/cotizadores/hogar --standalone --skip-tests
