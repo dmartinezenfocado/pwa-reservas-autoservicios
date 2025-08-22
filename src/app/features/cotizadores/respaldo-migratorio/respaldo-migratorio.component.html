@@ -1,17 +1,81 @@
-<div class="page">
-  <h2>Respaldo Migratorio</h2>
+<div class="migratorio-page page">
+  <h1>Adquiere tu seguro en línea</h1>
 
-  <form [formGroup]="form" (ngSubmit)="cotizar()" class="grid">
-    <label>Tipo de trámite <input formControlName="tramite"></label>
-    <label>Adultos <input type="number" formControlName="adultos"></label>
-    <label>Niños <input type="number" formControlName="ninos"></label>
+  <div class="layout">
+    <!-- Columna izquierda -->
+    <section class="col">
+      <label>
+        <span>Tipo de Residencia</span>
+        <select formControlName="residencia">
+          <option *ngFor="let r of residencias" [value]="r">{{ r }}</option>
+        </select>
+      </label>
 
-    <button type="submit" [disabled]="form.invalid">Calcular</button>
-  </form>
+      <label>
+        <span>Nacionalidad</span>
+        <select formControlName="nacionalidad">
+          <option *ngFor="let n of nacionalidades" [value]="n">{{ n }}</option>
+        </select>
+      </label>
 
-  <div *ngIf="prima !== null" class="resultado">
-    <div class="monto">Prima estimada: <strong>RD$ {{ prima }}</strong></div>
-    <small class="detalle">{{ detalle }}</small>
+      <label>
+        <span>Tipo de Identificación</span>
+        <select formControlName="tipoId">
+          <option *ngFor="let t of tiposId" [value]="t">{{ t }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Núm. de Identificación</span>
+        <input type="text" formControlName="identificacion" />
+      </label>
+    </section>
+
+    <!-- Columna centro -->
+    <section class="col">
+      <div class="dob">
+        <span>Fecha de Nacimiento</span>
+        <div class="row">
+          <select formControlName="dia">
+            <option [ngValue]="null">Día</option>
+            <option *ngFor="let d of dias" [value]="d">{{ d }}</option>
+          </select>
+          <select formControlName="mes">
+            <option [ngValue]="null">Mes</option>
+            <option *ngFor="let m of meses" [value]="m">{{ m }}</option>
+          </select>
+          <select formControlName="anio">
+            <option [ngValue]="null">Año</option>
+            <option *ngFor="let a of anios" [value]="a">{{ a }}</option>
+          </select>
+          <input class="edad" type="text" [value]="form.getRawValue().edad || 0" readonly placeholder="Edad" />
+        </div>
+      </div>
+
+      <label>
+        <span>A nombre de</span>
+        <input type="text" formControlName="nombre" />
+      </label>
+
+      <label>
+        <span>Correo Electrónico</span>
+        <input type="email" formControlName="email" />
+      </label>
+    </section>
+
+    <!-- Columna derecha (resumen) -->
+    <aside class="summary">
+      <div class="total">
+        <span>Total</span>
+        <strong>{{ totalUsd | currency:'USD':'symbol-narrow':'1.2-2':'en-US' }}</strong>
+      </div>
+
+      <button type="button" class="btn orange" (click)="cotizar()">Cotizar</button>
+      <button type="button" class="btn blue" (click)="limpiar()">Limpiar</button>
+      <button type="button" class="btn gray" (click)="comprar()">Comprar</button>
+
+      <div class="msg" *ngIf="mensaje">{{ mensaje }}</div>
+    </aside>
   </div>
 
   <app-back-cancel-bar />

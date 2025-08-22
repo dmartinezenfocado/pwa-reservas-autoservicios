@@ -1,3 +1,59 @@
-.grid{ display:grid; gap:.75rem; max-width:700px; }
-input{ width:100%; padding:.7rem; border-radius:.5rem; border:1px solid #345; }
-button{ padding:1rem 1.25rem; border:none; border-radius:.6rem; background:#264e72; color:#fff; }
+.migratorio-page {
+  h1{
+    text-align:center;
+    color:#214b6d;
+    font-weight:800;
+    margin:0 0 1.25rem;
+  }
+
+  .layout{
+    display:grid;
+    grid-template-columns: 1fr 1fr 360px;
+    gap:2rem;
+  }
+
+  .col label{
+    display:grid; gap:.4rem; margin-bottom:1rem;
+    span{ color:#2a3950; font-weight:700; }
+    input,select{
+      padding:.9rem 1rem; border-radius:.75rem; border:2px solid #f1a34f; /* borde naranja sutil */
+      background:#fff; color:#152236; outline:none;
+      &:focus{ border-color:#214b6d; box-shadow:0 0 0 3px rgba(33,75,109,.15); }
+      &[readonly]{ background:#eef4ff; border-color:#d7e1ef; }
+    }
+  }
+
+  .dob{
+    display:grid; gap:.4rem; margin-bottom:1rem;
+    .row{ display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:.5rem; }
+    select, .edad{ padding:.9rem 1rem; border-radius:.75rem; border:2px solid #f1a34f; }
+    .edad{ background:#d8e7fb; border-color:#c6dbf7; }
+  }
+
+  .summary{
+    align-self:start;
+    background:#f6f8fb; border-radius:1rem; padding:1.25rem;
+    .total{
+      display:flex; align-items:center; gap:.8rem; margin-bottom:1rem;
+      span{ font-size:1.6rem; color:#214b6d; font-weight:700; }
+      strong{ font-size:1.6rem; color:#214b6d; font-weight:900; }
+      &:after{ content:''; flex:1; }
+    }
+    .btn{
+      width:100%; padding:1rem 1.25rem; border:none; border-radius:.9rem;
+      font-size:1.1rem; font-weight:800; letter-spacing:.2px; margin-bottom:.75rem;
+      &.orange{ background:#ffb265; color:#1a2a3a; }
+      &.blue{ background:#214b6d; color:#fff; }
+      &.gray{ background:#8ea0b5; color:#fff; }
+    }
+    .msg{ margin-top:.5rem; background:#01112a; color:#fff; padding:.75rem 1rem; border-radius:.6rem; }
+  }
+
+  @media (max-width: 1100px){
+    .layout{ grid-template-columns: 1fr 1fr; }
+    .summary{ grid-column:1 / -1; }
+  }
+  @media (max-width: 760px){
+    .layout{ grid-template-columns: 1fr; }
+  }
+}
