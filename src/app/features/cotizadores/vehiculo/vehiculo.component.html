@@ -1,18 +1,95 @@
-<div class="page">
-  <h2>Cotizar Vehículo</h2>
+<div class="vehiculo-page page">
+  <h2>¿Qué vehículo desea asegurar?</h2>
 
-  <form [formGroup]="form" (ngSubmit)="cotizar()" class="grid">
-    <label>Marca <input formControlName="marca"></label>
-    <label>Modelo <input formControlName="modelo"></label>
-    <label>Año <input type="number" formControlName="anio"></label>
-    <label>Valor (RD$) <input type="number" formControlName="valor"></label>
+  <div class="grid">
+    <!-- Columna 1 -->
+    <div class="col">
+      <label>
+        <span>Chasis</span>
+        <input type="text" placeholder="" formControlName="chasis">
+      </label>
 
-    <button type="submit" [disabled]="form.invalid">Calcular</button>
-  </form>
+      <label>
+        <span>Año</span>
+        <select formControlName="anio">
+          <option *ngFor="let y of anios" [value]="y">{{ y }}</option>
+        </select>
+      </label>
 
-  <div *ngIf="prima !== null" class="resultado">
-    <div class="monto">Prima estimada: <strong>RD$ {{ prima }}</strong></div>
-    <small class="detalle">{{ detalle }}</small>
+      <label>
+        <span>Cilindros</span>
+        <select formControlName="cilindros">
+          <option *ngFor="let c of cilindradas" [value]="c">{{ c }}</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Columna 2 -->
+    <div class="col">
+      <label>
+        <span>Marca</span>
+        <select formControlName="marca">
+          <option *ngFor="let m of marcas" [value]="m">{{ m }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Tipo de vehículo</span>
+        <select formControlName="tipoVehiculo">
+          <option *ngFor="let t of tiposVehiculo" [value]="t">{{ t }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Tipo de Combustible</span>
+        <select formControlName="combustible">
+          <option *ngFor="let c of combustibles" [value]="c">{{ c }}</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Columna 3 -->
+    <div class="col">
+      <label>
+        <span>Modelo</span>
+        <select formControlName="modelo">
+          <option *ngFor="let mod of modelosPorMarca[form.controls.marca.value!]" [value]="mod">{{ mod }}</option>
+        </select>
+      </label>
+
+      <div class="valor-block">
+        <div class="valor-header">
+          <span>Valor del vehículo</span>
+          <div class="segmented">
+            <button type="button" [class.active]="isActiveMoneda('DOP')" (click)="seleccionarMoneda('DOP')">DOP</button>
+            <button type="button" [class.active]="isActiveMoneda('USD')" (click)="seleccionarMoneda('USD')">USD</button>
+          </div>
+        </div>
+
+        <div class="valor-input">
+          <input type="number" step="0.01" min="0" placeholder="0.00" formControlName="valor">
+        </div>
+
+        <p class="rango" *ngIf="minSig() !== null && maxSig() !== null">
+          Valor mínimo:
+          <strong>{{ minSig() | currency: form.controls.moneda.value!:'symbol':'1.2-2':'es-DO' }}</strong>
+          &nbsp;–&nbsp; Valor máximo:
+          <strong>{{ maxSig() | currency: form.controls.moneda.value!:'symbol':'1.2-2':'es-DO' }}</strong>
+        </p>
+      </div>
+
+      <div class="cond-block">
+        <span>Condición del Vehículo</span>
+        <div class="segmented full">
+          <button type="button" [class.active]="isActiveCond('okm')" (click)="setCondicion('okm')">0 Km</button>
+          <button type="button" [class.active]="isActiveCond('usado')" (click)="setCondicion('usado')">Usado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="secondary" (click)="limpiar()">Limpiar</button>
   </div>
 
   <app-back-cancel-bar />
