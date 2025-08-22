@@ -67,3 +67,16 @@ npx http-server -p 8080 -c-1 dist/pwa-reservas-autoservicios/browser
 
 
 ng g c features/cotizadores/hogar --standalone --skip-tests
+
+
+Cotizadores
+
+Vehiculo
+https://app.segurosreservas.com/CotizadorVehiculo/#/cotizacionGeneral/cotizar
+
+Respaldo
+https://app.segurosreservas.com/CotizadorMigratorio/#/migratorio/home
+
+
+Viajes
+https://app.segurosreservas.com/CotizadorViajes/#/viajes/home
